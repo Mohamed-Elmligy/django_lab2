@@ -1,0 +1,71 @@
+###create venv
+python3 -m venv venv
+source ./venv/bin/activate
+
+
+### after install packages
+pip freeze > requirements.txt
+
+### after download project
+pip install -r requirements.txt
+
+
+### create django project
+django-admin startproject app .
+django-admin startapp testapp
+
+
+##creat DATABASES
+sudo service postgresql start
+sudo -u postgres psql 
+CREATE DATABASE lab2_db;
+ALTER USER postgres PASSWORD 'postgres';
+
+
+###python command 
+python3 manage.py makemigrations
+
+python3 manage.py migrate
+
+python3 manage.py runserver
+
+
+##git command
+git init
+git add .
+git commit -m "asdas"
+
+git branch -M <main>
+git remote add origin git@github.com:Mohamed-Elmligy/django_lab2.git
+git push -u origin <main>
+##git push origin <branch name>=^
+
+### db using docker
+docker run -v lab2_volume:/var/lib/postgresql/data -p 5432:5432 -d -e POSTGRES_USER=postgres -e POSTGRES_PASSWORD=postgres -e POSTGRES_DB=postgres --name lab2_db postgres:14.0
+
+docker container exec -it djangoauth psql -U postgres
+
+### in setting.py
+DATABASES = {
+'default': {
+'ENGINE': 'django.db.backends.postgresql_psycopg2',
+'NAME': 'postgres',
+'USER': 'postgres',
+'PASSWORD': 'postgres',
+'HOST': 'localhost',
+'PORT': '5432',
+}
+
+python3 manage.py createsuperuser ### creat... by AymanNagy.Ahmed (Guest)
+AymanNagy.Ahmed (Guest)11:21 PM
+python3 manage.py createsuperuser
+
+
+### create user fro terminal
+python3 ./manage.py shell
+from users.models import User
+
+
+
+User.objects.create_user(username='ayman',password='123')
+
